@@ -2,13 +2,13 @@
     "version": "2.0.0",
     "configurations": [
         {
-            "name": "Launch",
-            "type": "ccpdbg",
+            "name": "Windows Launch",
+            "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/test",
             "args": [],
             "cwd": "${workspaceFolder}",
-            "console" : "integratedTerminal"
+            "console": "integratedTerminal"
         }
     ]
 }

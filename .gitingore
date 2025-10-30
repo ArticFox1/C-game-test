@@ -1,0 +1,13 @@
+*.exe
+*.ilk
+*.zip
+*.exp
+*.obj
+*.ddl
+*.pdb
+*.nativecodeanalysis.xml
+*.lib
+build
+.vs
+setting.json
+.clangd
