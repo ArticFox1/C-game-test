@@ -1,0 +1,14 @@
+{
+    "version": "2.0.0",
+    "configurations": [
+        {
+            "name": "Launch",
+            "type": "ccpdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/test",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "console" : "integratedTerminal"
+        }
+    ]
+}
