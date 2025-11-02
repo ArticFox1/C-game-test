@@ -1,3 +1,6 @@
 #!/bin/bash
 
-clang src/main.cpp test.exe
+libs=-luser32
+warnings="-Wno-writable-strings -Wno-format-security"
+
+clang++ -g src/main.cpp -otest.exe $libs $warnings
