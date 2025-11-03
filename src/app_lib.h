@@ -172,6 +172,28 @@ char* read_file(char* filePath, int* fileSize, char* buffer) {
     return buffer;
 }
 
-void write_file(char* filePath, char* buffer, int size) {
-    
+char* read_file(char* filePath, int* fileSize, BumpAllocator* bumpAllocator) {
+    char* file = 0;
+    long fileSize2 = get_file_size(filePath);
+    if(!fileSize2) {
+        return file;
+    }
+
+    char* buffer = bump_alloc(bumpAllocator,fileSize2+1);
+    file = read_file(filePath,fileSize,buffer);
+
+    return file;
 }
+
+void write_file(char* filePath, char* buffer, int size) {
+    Assert(filePath, "No filepath supplied!");
+    Assert(buffer, "No buffer supplied!");
+    auto file = fopen(filePath, "wb");
+    if(!file) {
+        Error("Failed opening file %s", filePath);
+        return;
+    }
+    fwrite(buffer, sizeof(char), size, file);
+    return;
+}
+

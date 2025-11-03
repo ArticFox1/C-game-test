@@ -74,7 +74,7 @@ void platform_update_window() {
 
 int main() {
 
-    platform_create_window(1200,720,"Woah, it's open now!!! :>");
+    platform_create_window(1200,720,"Sup gng");
 
     Error("HEEELP, HEEELP MEEE");
     Trace("I'm a warning, trust! :s");
