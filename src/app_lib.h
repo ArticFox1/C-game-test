@@ -197,3 +197,34 @@ void write_file(char* filePath, char* buffer, int size) {
     return;
 }
 
+bool copy_file(char* fileName, char* outputName, char* buffer) {
+    int fileSize = 0;
+    char* data = read_file(fileName, &fileSize, buffer);
+
+    auto outputFile = fopen(outputName, "wb");
+    if(!outputFile) {
+        Error("Failed opening file %s", outputName);
+        return false;
+    }
+
+    int result = fwrite(data, sizeof(char), fileSize, outputFile);
+    if(!result) {
+        Error("Failed opening file %s", outputName);
+        return false;
+    }
+
+    fclose(outputFile);
+    return true;
+}
+
+bool copy_file(char* fileName, char* outputName, BumpAllocator* bumpAllocator) {
+    char* file = 0;
+    long fileSize2 = get_file_size(fileName);
+
+    if(!fileSize2) {
+        return false;
+    }
+
+    char* buffer = bump_alloc(bumpAllocator, fileSize2+1);
+    return copy_file(fileName, outputName, buffer);
+}
