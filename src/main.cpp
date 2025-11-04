@@ -76,10 +76,6 @@ int main() {
 
     platform_create_window(1200,720,"Sup gng");
 
-    Error("HEEELP, HEEELP MEEE");
-    Trace("I'm a warning, trust! :s");
-    Warn("The one above me is lying to you...");
-
     while (running)
     {
         // Update
