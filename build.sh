@@ -1,6 +1,7 @@
 #!/bin/bash
 
-libs=-luser32
+libs="-luser32 -lopengl32"
 warnings="-Wno-writable-strings -Wno-format-security"
+includes="-IGL_lib -IGL_lib/Includes"
 
-clang++ -g src/main.cpp -otest.exe $libs $warnings
+clang++ $includes -g src/main.cpp -otest.exe $libs $warnings

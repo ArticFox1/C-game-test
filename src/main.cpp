@@ -1,76 +1,17 @@
 //Libraries
 #include "app_lib.h"
 
-//Globals
-bool running = true;
+#include "platform.h"
 
-//Functions
-bool platform_create_window(int width, int height, char* title);
-void platform_update_window();
+#define APIENTRY
+#include "glcorearb.h"
 
 //Windows
 #ifdef _WIN32
-#define WIN32_LEAN_AND_MEAN
-#define NOMINMAX
-#include <Windows.h>
-
-//Windows Globals
-HWND window;
-
-LRESULT CALLBACK windows_window_callback(HWND window, UINT msg, WPARAM wParam, LPARAM lParam) {
-    LRESULT result = 0;
-
-    switch (msg)
-    {
-    case WM_CLOSE:
-        running = false;
-        break;
-    
-    default:
-        result = DefWindowProcA(window,msg,wParam,lParam);
-    }
-    
-    return result;
-}
-
-
-//Windows create window
-bool platform_create_window(int width, int height, char* title) {
-    HINSTANCE instance = GetModuleHandleA(0);
-    WNDCLASSA wc = {};
-    wc.hInstance = instance;
-    wc.hIcon = LoadIcon(instance, IDI_APPLICATION);
-    wc.hCursor = LoadCursor(instance, IDC_ARROW);
-    wc.lpszClassName = "windowClass";
-    wc.lpfnWndProc = windows_window_callback;
-
-    if(!RegisterClassA(&wc)) {
-        return false;
-    }
-
-    int dwStyle = WS_OVERLAPPEDWINDOW;
-
-    
-    window = CreateWindowA("windowClass",title,dwStyle,0,0,width,height,NULL,NULL,instance,NULL);
-
-    if(window==NULL) {
-        return false;
-    }
-
-    ShowWindow(window,SW_SHOW);
-    return true;
-}
-
-void platform_update_window() {
-    MSG msg;
-
-    while(PeekMessageA(&msg, window, 0,0,PM_REMOVE)) {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
-    }
-}
-
+#include "win32_platform.ccp"
 #endif
+
+#include "gl_renderer.h"
 
 int main() {
 
